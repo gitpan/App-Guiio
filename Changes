@@ -1,3 +1,20 @@
+Author: James Simpson <j2simpso at uwaterloo.ca>
+Date  : Mon Aug 16 2010
+
+CHANGED : Repurposed ASCIIO for strictly designing User Interfaces in ASCII.
+		  Numerous changes made : Addition of a UI component palette and addition several types of components (stencils).
+		  Changed menu design from context menu to menu assigned to top of window.
+		  Changed behaviour of stripes to better reflect the behaviours that UI components have.
+		  Changed copy/paste behaviour to allow only ASCII text to be used for either routine.
+		  Changed open to allow for opening of strictly ASCII files containing UI design for GUIIO to interpret
+		  Changed save to ensure that designs created in GUIIO can be saved to a strictly text only format.
+		  This project (fork) is now being called GUIIO as its focus is on GUI designs using only ASCII
+OTHER NOTES:
+			This module as it stands now acts as a proof of concept that it is possible to bring the affordances
+			of a UI Builder such as QT Designer or GLADE Interface Builder for designing User Interfaces in a text only
+			medium.  It is our hope that by version 1.0 of the release, that GUIIO can be a fully functional implementaiton
+			of our goal.
+
 commit 67a872d9a3d01d46b04bf10c37974b9b7e696619
 Author: nadim khemir <nkh@cpan.org>
 Date:   Wed Dec 17 23:49:21 2008 +0100
