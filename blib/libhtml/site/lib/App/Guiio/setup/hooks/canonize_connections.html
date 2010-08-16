@@ -1,0 +1,234 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>App::Guiio::setup::hooks::canonize_connections</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body style="background-color: white">
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" style="background-color: #cccccc" valign="middle">
+<big><strong><span class="block">&nbsp;App::Guiio::setup::hooks::canonize_connections</span></strong></big>
+</td></tr>
+</table>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+
+</div>
+<!-- INDEX END -->
+
+<p>sub canonize_connections
+{
+my ($connections) = @_ ;</p>
+<p>for my $connection (@{$connections})
+	{
+	if
+		(
+		ref $connection-&gt;{CONNECTED} eq 'App::Guiio::stripes::section_wirl_arrow'
+		&amp;&amp; $connection-&gt;{CONNECTED}-&gt;<code>is_autoconnect_enabled()</code>
+		)
+		{
+		<code>reconnect_section_wirl_arrow($connection)</code>  ;
+		}
+	}
+}</p>
+<p>sub reconnect_section_wirl_arrow
+{
+my ($connection) = @_ ;</p>
+<p>my ($connected, $connectee) = ($connection-&gt;{CONNECTED},  $connection-&gt;{CONNECTEE}) ;</p>
+<p>my @connectors = $connected-&gt;<code>get_all_points()</code> ;
+my ($start_name, $end_name) = ($connectors[0]{NAME}, $connectors[-1]{NAME}) ;</p>
+<p><table cellspacing="0" cellpadding="0"><tr><td>if($connection-&gt;{CONNECTOR}{NAME} eq $end_name)
+<tr><td><td>{
+<tr><td><td># end connector
+<tr><td><td>my ($connectee_x, $connectee_y, $connectee_width, $connectee_hight) = 
+<tr><td><td>($connectee-&gt;{X}, $connectee-&gt;{Y}, $connectee-&gt;get_size()) ;</table></p>
+<pre>
+        my $connected_x = $connected-&gt;{X} + $connectors[-2]{X};
+        my $connected_y = $connected-&gt;{Y} + $connectors[-2]{Y};
+        
+        if($connected_x &lt; $connectee_x)
+                {
+                # arrow starts on left of the box
+                if($connected-&gt;get_section_direction(-1) =~ /^right/)
+                        {
+                        if($connected_y &lt; $connectee_y)
+                                {
+                                reconnect($connection, 'top_center', $end_name) ;
+                                }
+                        else
+                                {
+                                if($connected_y &lt; $connectee_y + $connectee_hight)
+                                        {
+                                        reconnect($connection, 'left_center', $end_name) ;
+                                        }
+                                else
+                                        {
+                                        # arrow below, right-up to bottom_center
+                                        reconnect($connection, 'bottom_center', $end_name) ;
+                                        }
+                                }
+                        }
+                else
+                        {
+                        # arrow going up or down
+                        reconnect($connection, 'left_center', $end_name) ;
+                        }
+                }
+        elsif($connected_x &lt; $connectee_x + $connectee_width)
+                {
+                # arrow starts within width of the box
+                if($connected_y &lt; $connectee_y)
+                        {
+                        #arrow above, right-down to top_center
+                        reconnect($connection, 'top_center', $end_name, 'right') ;
+                        }
+                else
+                        {
+                        reconnect($connection, 'bottom_center', $end_name) ;
+                        }
+                }
+        else
+                {
+                # arrow starts on right of the box
+                if($connected-&gt;get_section_direction(-1) =~ /^left/)
+                        {
+                        if($connected_y &lt; $connectee_y)
+                                {
+                                reconnect($connection, 'top_center', $end_name) ;
+                                }
+                        else
+                                {
+                                if($connected_y &lt; $connectee_y + $connectee_hight)
+                                        {
+                                        reconnect($connection, 'right_center', $end_name) ;
+                                        }
+                                else
+                                        {
+                                        reconnect($connection, 'bottom_center', $end_name) ;
+                                        }
+                                }
+                        }
+                else
+                        {
+                        # arrow going up or down
+                        reconnect($connection, 'right_center', $end_name) ;
+                        }
+                }
+        }
+else
+        {
+        # start connector
+        my ($connectee_x, $connectee_y, $connectee_width, $connectee_hight) = 
+                ($connectee-&gt;{X}, $connectee-&gt;{Y}, $connectee-&gt;get_size()) ;</pre>
+<pre>
+        my $end_connector_x = $connected-&gt;{X} + $connectors[1]{X};
+        my $end_connector_y = $connected-&gt;{Y} + $connectors[1]{Y} ;</pre>
+<pre>
+        if($end_connector_x &lt; $connectee_x)
+                {
+                # arrow ends on left of the box
+                if($connected-&gt;get_section_direction(0) !~ /^left/)
+                        {
+                        if($end_connector_y &lt; $connectee_y)
+                                {
+                                reconnect($connection, 'top_center', $start_name) ;
+                                }
+                        else
+                                {
+                                if($end_connector_y &lt; $connectee_y + $connectee_hight)
+                                        {
+                                        reconnect($connection, 'left_center', $start_name) ;
+                                        }
+                                else
+                                        {
+                                        reconnect($connection, 'bottom_center', $start_name) ;
+                                        }
+                                }
+                        }
+                else
+                        {
+                        reconnect($connection, 'left_center', $start_name) ;
+                        }
+                }
+        elsif($end_connector_x &lt; $connectee_x + $connectee_width)
+                {
+                # arrow starts within width of the box
+                if($end_connector_y &lt; $connectee_y)
+                        {
+                        reconnect($connection, 'top_center', $start_name) ;
+                        }
+                else
+                        {
+                        reconnect($connection, 'bottom_center', $start_name) ;
+                        }
+                }
+        else
+                {
+                # arrow ends on right of the box
+                if($connected-&gt;get_section_direction(0) !~ /^right/)
+                        {
+                        if($end_connector_y &lt; $connectee_y)
+                                {
+                                reconnect($connection, 'top_center', $start_name) ;
+                                }
+                        else
+                                {
+                                if($end_connector_y &lt; $connectee_y + $connectee_hight)
+                                        {
+                                        reconnect($connection, 'right_center', $start_name) ;
+                                        }
+                                else
+                                        {
+                                        reconnect($connection, 'bottom_center', $start_name) ;
+                                        }
+                                }
+                        }
+                else
+                        {
+                        reconnect($connection, 'right_center', $start_name) ;
+                        }
+                }
+        }
+}</pre>
+<p>sub reconnect
+{
+my($guiio_connection, $connection_name, $connector_name, $hint) = @_ ;</p>
+<p><table cellspacing="0" cellpadding="0"><tr><td>if($guiio_connection-&gt;{CONNECTION}{NAME} ne $connection_name)
+<tr><td><td>{
+<tr><td><td>my ($connected, $connectee) = ($guiio_connection-&gt;{CONNECTED},  $guiio_connection-&gt;{CONNECTEE}) ;</table></p>
+<pre>
+        my ($connection) = $connectee-&gt;get_named_connection($connection_name) ;
+        my ($connector) = $connected-&gt;get_named_connection($connector_name) ;</pre>
+<pre>
+        my $x_offset_to_connection = ($connectee-&gt;{X} + $connection-&gt;{X}) - ($connected-&gt;{X} + $connector-&gt;{X}) ;
+        my $y_offset_to_connection =  ($connectee-&gt;{Y} + $connection-&gt;{Y}) - ($connected-&gt;{Y} + $connector-&gt;{Y}) ;</pre>
+<pre>
+        # move connector
+        #~ print &quot;reconnect: $connection_name $connector_name\n&quot; ;
+        my ($x_offset, $y_offset, $width, $height, $new_connector) = 
+                $connected-&gt;move_connector($connector_name, $x_offset_to_connection, $y_offset_to_connection, $hint) ;
+                
+        $connected-&gt;{X} += $x_offset ;
+        $connected-&gt;{Y} += $y_offset ;
+        
+        $guiio_connection-&gt;{CONNECTOR} = $new_connector ;
+        $guiio_connection-&gt;{CONNECTION} = $connection ;
+        }
+}</pre>
+<p></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" style="background-color: #cccccc" valign="middle">
+<big><strong><span class="block">&nbsp;App::Guiio::setup::hooks::canonize_connections</span></strong></big>
+</td></tr>
+</table>
+
+</body>
+
+</html>

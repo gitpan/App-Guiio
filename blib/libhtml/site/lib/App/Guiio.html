@@ -1,0 +1,418 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>App::Guiio - Plain ASCII diagram</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body style="background-color: white">
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" style="background-color: #cccccc" valign="middle">
+<big><strong><span class="block">&nbsp;App::Guiio - Plain ASCII diagram</span></strong></big>
+</td></tr>
+</table>
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#documentation">DOCUMENTATION</a></li>
+	<ul>
+
+		<li><a href="#guiio_user_interface">Guiio user interface</a></li>
+		<li><a href="#context_menu">context menu</a></li>
+		<li><a href="#keyboard_shortcuts">keyboard shortcuts</a></li>
+		<li><a href="#elements">elements</a></li>
+		<ul>
+
+			<li><a href="#wirl_arrow">wirl arrow</a></li>
+			<li><a href="#box_and_text">box and text</a></li>
+			<li><a href="#your_own_stencils">your own stencils</a></li>
+			<li><a href="#your_own_element_type">your own element type</a></li>
+		</ul>
+
+		<li><a href="#exporting_to_ascii">exporting to ASCII</a></li>
+	</ul>
+
+	<li><a href="#examples">EXAMPLES</a></li>
+	<li><a href="#dependencies">DEPENDENCIES</a></li>
+	<li><a href="#bugs_and_limitations">BUGS AND LIMITATIONS</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+	<li><a href="#license_and_copyright">LICENSE AND COPYRIGHT</a></li>
+	<li><a href="#supported_oses">SUPPORTED OSes</a></li>
+	<ul>
+
+		<li><a href="#gentoo">Gentoo</a></li>
+		<li><a href="#freebsd">FreeBSD</a></li>
+		<li><a href="#ubuntu_and_debian">Ubuntu and Debian</a></li>
+		<li><a href="#windows">Windows</a></li>
+	</ul>
+
+	<li><a href="#mac_osx">Mac OsX</a></li>
+	<li><a href="#other_unices">other unices</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>App::Guiio - Plain ASCII diagram</p>
+<pre>
+                          |     |             |       |
+                  |       |     |      |      |       |
+                  |       |     |      |      |       |
+                  v       |     v      |      v       |
+                          v            v              v
+                 _____                           _____      
+                /\  _  \                        /\  __ \    
+                \ \ \_\ \    ___     ___   _   _\ \ \ \ \   
+        -----&gt;   \ \  __ \  /  __\  / ___\/\ \/\ \ \ \ \ \  -----&gt;
+                  \ \ \ \ \/\__,  \/\ \___' \ \ \ \ \ \_\ \ 
+                   \ \_\ \_\/\____/\ \____/\ \_\ \_\ \_____\
+                    \/_/\/_/\/___/  \/___/  \/_/\/_/\/_____/
+        
+                  |             |             |     |
+                  |     |       |     |       |     |      |
+                  v     |       |     |       v     |      |
+                        |       v     |             |      |
+                        v             |             |      v
+                                      v             v
+        (\_/)
+        (O.o) ASCII world domination is near!
+        (&gt; &lt;)</pre>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+        $&gt; perl guiio.pl</pre>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>This gtk2-perl application allows you to draw ASCII diagrams in a modern (but simple) graphical
+application. The ASCII graphs can be saved as ASCII or in a format that allows you to modify them later.</p>
+<p>Thanks to all the Perl-QA hackathon 2008 in Oslo for pushing me to do an early release.</p>
+<p>Special thanks go to the Muppet and the gtk-perl group, Gábor Szabó for his help and advices.</p>
+<p>Adam Kennedy coined the cool name.</p>
+<p>Sometimes a diagram is worth a lot of text in a source code file. It has always been painfull to do 
+ASCII diagrams by hand.</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="documentation">DOCUMENTATION</a></h1>
+<p>
+</p>
+<h2><a name="guiio_user_interface">Guiio user interface</a></h2>
+<pre>
+        
+            .-----------------------------------------------------------------.
+            |                             Guiio                              |
+            |-----------------------------------------------------------------|
+            | ............................................................... |
+            | ..............-------------..------------..--------------...... |
+            | .............| stencils  &gt; || guiio   &gt; || box          |..... |
+            | .............| Rulers    &gt; || computer &gt; || text         |..... |
+            | .............| File      &gt; || people   &gt; || wirl_arrow   |..... |
+     grid----------&gt;.......'-------------'| divers   &gt; || axis         |..... |
+            | ............................'------------'| boxes      &gt; |..... |
+            | ......................^...................| rulers     &gt; |..... |
+            | ......................|...................'--------------'..... |
+            | ......................|........................................ |
+            | ......................|........................................ |
+            | ......................|........................................ |
+            | ......................|........................................ |
+            '-----------------------|-----------------------------------------'
+                                    |
+                                    |
+                              context menu</pre>
+<p>
+</p>
+<h2><a name="context_menu">context menu</a></h2>
+<p>The context menu allows to access to <strong>guiio</strong> commands. <strong>ASCII</strong> is used to insert ASCII elements.</p>
+<p>
+</p>
+<h2><a name="keyboard_shortcuts">keyboard shortcuts</a></h2>
+<p>All the keyboad commands definitions can be found under <em>guiio/setup/actions/</em>. Among the commands
+implemented are:</p>
+<ul>
+<li><strong><a name="select_all" class="item">select all</a></strong>
+
+<li><strong><a name="delete" class="item">delete</a></strong>
+
+<li><strong><a name="undo" class="item">undo</a></strong>
+
+<li><strong><a name="group_ungroup" class="item">group/ungroup</a></strong>
+
+<li><strong><a name="open_save" class="item">open / save</a></strong>
+
+<li><strong><a name="local_clipboard_operations" class="item">local clipboard operations</a></strong>
+
+</ul>
+<p>A window displaying the currently available commands is displayed if you press <strong>K</strong>.</p>
+<p>
+</p>
+<h2><a name="elements">elements</a></h2>
+<p>There but a few elements implemented at the moment.</p>
+<p>
+</p>
+<h3><a name="wirl_arrow">wirl arrow</a></h3>
+<p>An arrow that tries to do what you want. Try rotating the end clockwise then counter clockwise to see how it acts</p>
+<pre>
+               ^
+               |
+               |    --------.
+               |            |
+               '-------     |
+                            |
+ O-------------X     /      |
+                    /       |
+                   /        |
+                  /         v
+                 /
+                /
+               v</pre>
+<p>
+</p>
+<h3><a name="box_and_text">box and text</a></h3>
+<p>Both are implemented within the same code. Try double clicking on a box to see what you can do with it.</p>
+<pre>
+                 .----------.
+                 |  title   |
+  .----------.   |----------|   ************
+  |          |   | body 1   |   *          *
+  '----------'   | body 2   |   ************
+                 '----------'
+                                             anything in a box
+                                 (\_/)               |
+         edit_me                 (O.o)  &lt;------------'
+                                 (&gt; &lt;)</pre>
+<p>
+</p>
+<h3><a name="your_own_stencils">your own stencils</a></h3>
+<p>Take a look at <em>setup/stencils/computer</em> for a stencil example. Stencils lites in <em>setup/setup.ini</em> will
+be loaded when <strong>Guiio</strong> starts.</p>
+<p>
+</p>
+<h3><a name="your_own_element_type">your own element type</a></h3>
+<p>For simple elemnts, put your design in a box. that should cover 90% of anyone's needs. You can look in 
+<em>lib/stripes</em> for element implementation examples.</p>
+<p>
+</p>
+<h2><a name="exporting_to_ascii">exporting to ASCII</a></h2>
+<p>You can export to a file in ASCII format but using the <strong>.txt</strong> extension.</p>
+<p>Exporting to the clipboard is done with <strong>ctl + e</strong>.</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="examples">EXAMPLES</a></h1>
+<pre>
+        
+           User code ^            ^ OS code
+                      \          /
+                       \        /
+                        \      /
+           User code &lt;----Mode-----&gt;OS code
+                        /      \
+                       /        \
+                      /          \
+          User code  v            v OS code</pre>
+<pre>
+        
+             .---.  .---. .---.  .---.    .---.  .---.
+    OS API   '---'  '---' '---'  '---'    '---'  '---'
+               |      |     |      |        |      |
+               v      v     |      v        |      v
+             .------------. | .-----------. |  .-----.
+             | Filesystem | | | Scheduler | |  | MMU |
+             '------------' | '-----------' |  '-----'
+                    |       |      |        |
+                    v       |      |        v
+                 .----.     |      |    .---------.
+                 | IO |&lt;----'      |    | Network |
+                 '----'            |    '---------'
+                    |              |         |
+                    v              v         v
+             .---------------------------------------.
+             |                  HAL                  |
+             '---------------------------------------'</pre>
+<pre>
+                 
+                 .---------.  .---------.
+                 | State 1 |  | State 2 |
+                 '---------'  '---------'
+                    ^   \         ^  \
+                   /     \       /    \
+                  /       \     /      \
+                 /         \   /        \
+                /           \ /          \
+               /             v            v
+            ******        ******        ******
+            * T1 *        * T2 *        * T3 *
+            ******        ******        ******
+               ^             ^             /
+                \             \           /
+                 \             \         /
+                  \             \       / stimuli
+                   \             \     /
+                    \             \   v
+                     \         .---------.
+                      '--------| State 3 |
+                               '---------'</pre>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="dependencies">DEPENDENCIES</a></h1>
+<p>gnome libraries, gtk, gtk-perl, perl</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="bugs_and_limitations">BUGS AND LIMITATIONS</a></h1>
+<p>Undoubtedly many as I wrote this as a fun little project where I used no design nor 'methodic' whatsoever.</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<pre>
+        Khemir Nadim ibn Hamouda
+        CPAN ID: NKH
+        <a href="mailto:nadim@khemir.net">mailto:nadim@khemir.net</a>
+
+</pre>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="license_and_copyright">LICENSE AND COPYRIGHT</a></h1>
+<p>This program is free software; you can redistribute
+it and/or modify it under the same terms as Perl itself.</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="supported_oses">SUPPORTED OSes</a></h1>
+<p>
+</p>
+<h2><a name="gentoo">Gentoo</a></h2>
+<p>I run gentoo, packages to install gtk-perl exist. Install Ascii with cpan.</p>
+<p>
+</p>
+<h2><a name="freebsd">FreeBSD</a></h2>
+<p>FreeBSD users can now install guiio either by package:</p>
+<p>$ pkg_add -r guiio</p>
+<p>or from source (out of the ports system) by:</p>
+<p>$ cd /usr/ports/graphics/guiio
+$ make install clean</p>
+<p>Thanks to Emanuel Haupt.</p>
+<p>
+</p>
+<h2><a name="ubuntu_and_debian">Ubuntu and Debian</a></h2>
+<p>Ports are on the way.</p>
+<p>
+</p>
+<h2><a name="windows">Windows</a></h2>
+<p>guiio is part of <strong>camelbox</strong> and can be found here: <a href="http://code.google.com/p/camelbox/">http://code.google.com/p/camelbox/</a>. Install, run guiio from the 'bin' directory.</p>
+<pre>
+      .-------------------------------.
+     /                               /|
+    /     camelbox for win32        / |
+   /                               /  |
+  /                               /   |
+ .-------------------------------.    |
+ |  ______\\_,                   |    |
+ | (_. _ o_ _/                   |    |
+ |  '-' \_. /                    |    |
+ |      /  /                     |    |
+ |     /  /    .--.  .--.        |    |
+ |    (  (    / '' \/ '' \   &quot;   |    |
+ |     \  \_.'            \   )  |    |
+ |     ||               _  './   |    |
+ |      |\   \     ___.'\  /     |    |
+ |        '-./   .'    \ |/      |    |
+ |           \| /       )|\      |    |
+ |            |/       // \\     |    .
+ |            |\    __//   \\__  |   /
+ |           //\\  /__/  mrf\__| |  /
+ |       .--_/  \_--.            | /
+ |      /__/      \__\           |/      
+ '-------------------------------'
+
+</pre>
+<p><strong>camelbox</strong> is a great distribution for windows. I hope it will merge with X-berry series of Perl distributions.</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="mac_osx">Mac OsX</a></h1>
+<p>This works too (and I have screenshots to prove it :). I don't own a mac and the mac user hasn't send me how to do it yet.</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="other_unices">other unices</a></h1>
+<p>YMMV, install gtk-perl and guiio from cpan.</p>
+<p>
+<a href="#__index__"><small>Back to Top</small></a>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<pre>
+        <a href="http://www.jave.de">http://www.jave.de</a>
+        <a href="http://search.cpan.org/~osfameron/Text-JavE-0.0.2/JavE.pm">http://search.cpan.org/~osfameron/Text-JavE-0.0.2/JavE.pm</a>
+        <a href="http://ditaa.sourceforge.net/">http://ditaa.sourceforge.net/</a>
+        <a href="http://www.codeproject.com/KB/macros/codeplotter.aspx">http://www.codeproject.com/KB/macros/codeplotter.aspx</a>
+        <a href="http://search.cpan.org/~jpierce/Text-FIGlet-1.06/FIGlet.pm">http://search.cpan.org/~jpierce/Text-FIGlet-1.06/FIGlet.pm</a>
+        <a href="http://www.fossildraw.com/?gclid=CLanxZXxoJECFRYYEAodnBS8Dg">http://www.fossildraw.com/?gclid=CLanxZXxoJECFRYYEAodnBS8Dg</a> (doesn't always respond)
+        
+        <a href="http://www.ascii-art.de">http://www.ascii-art.de</a> (used some entries as base for the network stencil)
+        <a href="http://c2.com/cgi/wiki?UmlAsciiArt">http://c2.com/cgi/wiki?UmlAsciiArt</a>
+        <a href="http://www.textfiles.com/art/">http://www.textfiles.com/art/</a>
+        <a href="http://www2.b3ta.com/_bunny/texbunny.gif">http://www2.b3ta.com/_bunny/texbunny.gif</a>
+        
+
+</pre>
+<pre>
+     *\o_               _o/*
+      /  *             *  \
+     &lt;\       *\o/*       /&gt;
+                )
+         o/*   / &gt;    *\o
+         &lt;\            /&gt;
+ __o     */\          /\*     o__
+ * /&gt;                        &lt;\ *
+  /\*    __o_       _o__     */\
+        * /  *     *  \ *
+         &lt;\           /&gt;
+              *\o/*
+ ejm97        __)__
+
+</pre>
+<p><a href="#__index__"><small>Back to Top</small></a></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" style="background-color: #cccccc" valign="middle">
+<big><strong><span class="block">&nbsp;App::Guiio - Plain ASCII diagram</span></strong></big>
+</td></tr>
+</table>
+
+</body>
+
+</html>
